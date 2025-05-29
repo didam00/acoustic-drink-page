@@ -9,6 +9,7 @@ const nextConfig = {
   trailingSlash: true,
   // ESLint 검사 비활성화
   eslint: {
+    // 배포 시 ESLint 검사 비활성화
     ignoreDuringBuilds: true,
   },
 };
