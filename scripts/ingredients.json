@@ -1,0 +1,881 @@
+[
+  {
+    "name": "갈리아노",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 42.3
+  },
+  {
+    "name": "계란",
+    "syn": [
+      "달걀"
+    ],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "고량주",
+    "syn": [
+      "연태고량주"
+    ],
+    "category": "other_spirits",
+    "abv": 34
+  },
+  {
+    "name": "그랑 마니에르",
+    "syn": [
+      "그랑 마르니에"
+    ],
+    "category": "liqueur",
+    "abv": 40
+  },
+  {
+    "name": "그레나딘 시럽",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "그린 샤르트뢰즈",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 55
+  },
+  {
+    "name": "깔루아",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 20
+  },
+  {
+    "name": "깔바도스",
+    "syn": [],
+    "category": "other_spirits",
+    "abv": 40
+  },
+  {
+    "name": "넛맥 파우더",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "다크 럼",
+    "syn": [],
+    "category": "rum",
+    "abv": 0
+  },
+  {
+    "name": "데킬라",
+    "syn": [],
+    "category": "tequila",
+    "abv": 40
+  },
+  {
+    "name": "듀어스 12",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 0
+  },
+  {
+    "name": "드라이 베르뭇",
+    "syn": [
+      "드라이 베르무트",
+      "베르무트",
+      "베르뭇"
+    ],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "드라이 진",
+    "syn": [],
+    "category": "gin",
+    "abv": 40
+  },
+  {
+    "name": "드람뷔",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 40
+  },
+  {
+    "name": "라이 위스키",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 0
+  },
+  {
+    "name": "라임",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "라임 즙",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "라즈베리",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "라즈베리 시럽",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "럼",
+    "syn": [],
+    "category": "rum",
+    "abv": 40
+  },
+  {
+    "name": "레드와인",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "레모네이드",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "레몬",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "레몬 즙",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "레포사도 데킬라",
+    "syn": [],
+    "category": "tequila",
+    "abv": 0
+  },
+  {
+    "name": "로즈마리",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "론디아즈 151",
+    "syn": [
+      "151럼",
+      "바카디 151"
+    ],
+    "category": "rum",
+    "abv": 0
+  },
+  {
+    "name": "룩사르도 마라스키노",
+    "syn": [
+      "마라스키노",
+      "룩사르도 마라스키노 리큐르"
+    ],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "릴레 블랑",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "마라스키노 체리",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "마요네즈",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "말리부",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 21
+  },
+  {
+    "name": "맥주",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "메즈칼",
+    "syn": [],
+    "category": "other_spirits",
+    "abv": 40
+  },
+  {
+    "name": "멜론 리큐르",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "물",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "미도리",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "민트",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "민트 체리",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "바나나",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "바나나 리큐르",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "바나나칩",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "바닐라 보드카",
+    "syn": [],
+    "category": "vodka",
+    "abv": 0
+  },
+  {
+    "name": "바닐라 시럽",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "바카디 화이트",
+    "syn": [],
+    "category": "rum",
+    "abv": 0
+  },
+  {
+    "name": "버번 위스키",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 46.5
+  },
+  {
+    "name": "벌꿀",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "베네딕틴 D.O.M",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 40
+  },
+  {
+    "name": "베일리스",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 17
+  },
+  {
+    "name": "보드카",
+    "syn": [],
+    "category": "vodka",
+    "abv": 40.0
+  },
+  {
+    "name": "봄베이 브램블 진",
+    "syn": [],
+    "category": "gin",
+    "abv": 0
+  },
+  {
+    "name": "브랜디",
+    "syn": [],
+    "category": "other_spirits",
+    "abv": 40
+  },
+  {
+    "name": "블랙베리",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "블렌디드 스카치 위스키",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 0
+  },
+  {
+    "name": "블루 큐라소",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "빨간 체리",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "사과",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "생 제르맹",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "샹그리아",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "석류 가죽",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "설탕",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "설탕 시럽",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "스윗 베르뭇",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "스윗 앤 사워 믹스",
+    "syn": [
+      "스윗사워믹스"
+    ],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "스카치 위스키",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 40
+  },
+  {
+    "name": "스타우트",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "스프라이트",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "슬로 진",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "시나몬 스틱",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "실버 데킬라",
+    "syn": [],
+    "category": "tequila",
+    "abv": 0
+  },
+  {
+    "name": "아가베 시럽",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "아마레또",
+    "syn": [
+      "디사론노",
+      "아말렛"
+    ],
+    "category": "liqueur",
+    "abv": 28
+  },
+  {
+    "name": "아몬드 브리즈",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "아몬드 익스트랙",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "아페롤",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "압생트",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "앙고스투라 비터",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 44.7
+  },
+  {
+    "name": "애프리콧 브랜디",
+    "syn": [
+      "애프리코트 브랜디"
+    ],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "애플민트",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "애플퍼커",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "엘더플라워 리큐르",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "오렌지",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "오렌지 비터",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "오렌지 칩",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "오렌지 플라워 워터",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "오르쟈 시럽",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "오버프루프 럼",
+    "syn": [],
+    "category": "rum",
+    "abv": 0
+  },
+  {
+    "name": "오이 하프",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "올드 톰 진",
+    "syn": [],
+    "category": "gin",
+    "abv": 0
+  },
+  {
+    "name": "올리브",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "우유",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "자몽",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "잭다니엘 애플",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 0
+  },
+  {
+    "name": "제로펩시",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "조니워커 블랙라벨 오징어게임 에디션",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 0
+  },
+  {
+    "name": "조니워커 블랙루비",
+    "syn": [],
+    "category": "whiskey",
+    "abv": 0
+  },
+  {
+    "name": "지룩스 라임",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "진",
+    "syn": [],
+    "category": "gin",
+    "abv": 40
+  },
+  {
+    "name": "진저비어",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "진저에일",
+    "syn": [
+      "진지비어"
+    ],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "쪽파",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  },
+  {
+    "name": "청사과",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "청양고추",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "체리",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "초콜릿 비터",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "치나",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "카샤사",
+    "syn": [],
+    "category": "other_spirits",
+    "abv": 0
+  },
+  {
+    "name": "카시스 리큐르",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "카카오 화이트",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "캄파리",
+    "syn": [],
+    "category": "bitter",
+    "abv": 24
+  },
+  {
+    "name": "케텔 원 보드카",
+    "syn": [],
+    "category": "vodka",
+    "abv": 0
+  },
+  {
+    "name": "코냑",
+    "syn": [
+      "꼬냑"
+    ],
+    "category": "other_spirits",
+    "abv": 40
+  },
+  {
+    "name": "코인트로",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 40
+  },
+  {
+    "name": "코코넛 밀크",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "코코넛 크림",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "콜라",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "쿠바 럼",
+    "syn": [],
+    "category": "rum",
+    "abv": 0
+  },
+  {
+    "name": "크러쉬드 아이스",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "크렌베리",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "크렘 드 민트 그린",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 25
+  },
+  {
+    "name": "크렘 드 민트 화이트",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 25
+  },
+  {
+    "name": "크렘 드 카시스",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "크렘 드 카카오 화이트",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "탄산수",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "테라",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "토닉워터",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "트리플 섹",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "파마",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "파인애플",
+    "syn": [],
+    "category": "fruit",
+    "abv": 0
+  },
+  {
+    "name": "패션후르츠 믹스",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "페이쇼드 비터",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "푼테메스",
+    "syn": [],
+    "category": "fortified_and_bitter",
+    "abv": 0
+  },
+  {
+    "name": "피나콜라다 믹스",
+    "syn": [],
+    "category": "mixers",
+    "abv": 0
+  },
+  {
+    "name": "피스코",
+    "syn": [],
+    "category": "other_spirits",
+    "abv": 38
+  },
+  {
+    "name": "피치트리",
+    "syn": [],
+    "category": "liqueur",
+    "abv": 0
+  },
+  {
+    "name": "하바나 클럽 럼",
+    "syn": [],
+    "category": "rum",
+    "abv": 0
+  },
+  {
+    "name": "핸드릭스 진",
+    "syn": [],
+    "category": "gin",
+    "abv": 0
+  },
+  {
+    "name": "허니 시럽",
+    "syn": [],
+    "category": "other",
+    "abv": 0
+  },
+  {
+    "name": "호세쿠엘보",
+    "syn": [],
+    "category": "tequila",
+    "abv": 0
+  },
+  {
+    "name": "화이트 럼",
+    "syn": [],
+    "category": "rum",
+    "abv": 40
+  },
+  {
+    "name": "후추",
+    "syn": [],
+    "category": "spices_and_garnish",
+    "abv": 0
+  }
+]

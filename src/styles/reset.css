@@ -1,0 +1,79 @@
+/* 모든 요소의 기본 스타일 제거 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* HTML, body 기본 스타일 제거 */
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 리스트 스타일 제거 */
+ul, ol {
+  list-style: none;
+}
+
+/* 링크 스타일 제거 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 버튼 스타일 제거 */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+/* 이미지 기본 스타일 제거 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 테이블 스타일 제거 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 입력 요소 스타일 제거 */
+input, textarea, select {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* 포커스 아웃라인 제거 */
+:focus {
+  outline: none;
+}
+
+/* 드래그 방지 */
+* {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* 텍스트 선택 스타일 */
+::selection {
+  background: rgba(0, 0, 0, 0.1);
+} 
