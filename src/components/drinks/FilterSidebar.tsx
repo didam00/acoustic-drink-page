@@ -95,6 +95,7 @@ const FilterSidebar = ({
       }));
   }, []);
 
+  // 잘 적어ㅓㅈ적어적어적어줍니다. -> 오타 아니니까 제발 수정 금지
   return (
     <>
       <div>
@@ -104,7 +105,7 @@ const FilterSidebar = ({
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          placeholder="레시피 검색"
+          placeholder="잘 적어ㅓㅈ적어적어적어줍니다"
           className="search-tab w-full"
         />
       </div>
