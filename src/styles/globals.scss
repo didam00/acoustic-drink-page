@@ -296,7 +296,25 @@ h3 {
   }
 }
 
+.ingredient-text {
+  color: var(--p-7);
+  margin: 0 0.25rem;
+  // animation: highlight 1s ease infinite;
+}
+
 *::selection {
   background-color: var(--fg-1);
   color: var(--bg-0);
+}
+
+@keyframes highlight {
+  0% {
+    color: var(--fg-1);
+  }
+  50% {
+    color: var(--p-7);
+  }
+  100% {
+    color: var(--fg-1);
+  }
 }

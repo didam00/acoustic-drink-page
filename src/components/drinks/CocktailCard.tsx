@@ -24,7 +24,7 @@ const CocktailCard = React.memo(({video, focus, onClick}: CocktailCardProps) => 
 
   return (
     <div 
-      className={`card-container relative overflow-visible cursor-pointer rounded-lg transition-all animate-fade-in ${focus ? "focus" : ""}`}
+      className={`card-container relative overflow-visible cursor-pointer rounded-lg transition-all animate-fade-in w-full ${focus ? "focus" : ""}`}
       onClick={onClick}
     >
       <div className="img-wrap relative w-full aspect-[2/3] overflow-hidden rounded-lg fg-glow-0">

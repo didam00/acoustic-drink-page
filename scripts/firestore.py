@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 
 # 서비스 계정 키 경로 (절대경로나 상대경로)
-db = firestore.Client.from_service_account_json("../key/firebase-sevice-account.json")
+db = firestore.Client.from_service_account_json("../key/firebase-service-account.json")
 video_collection = db.collection("videos")
 
 def find_empty_ingredients():

@@ -8,6 +8,7 @@ import { VideoData } from '@/types/video';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import FilterSidebar from '@/components/drinks/FilterSidebar';
 import DetailSidebar from '@/components/drinks/DetailSidebar';
+import BottomSheet from '@/components/common/BottomSheet';
 import ingredientsTreeData from '../../../public/json/ingredients_tree.json';
 import { IngredientsTree } from '@/components/drinks/types';
 
@@ -50,6 +51,8 @@ export default function DrinksClient() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   // URL 파라미터 업데이트 함수
   const updateSearchParams = useCallback((id: string | null) => {
@@ -156,12 +159,14 @@ export default function DrinksClient() {
   const handleCardClick = useCallback((video: VideoData) => {
     setSelectedVideo(video);
     updateSearchParams(video.id);
+    setIsDetailOpen(true);
   }, [updateSearchParams]);
 
   // 상세보기 닫기
   const handleClose = useCallback(() => {
     setSelectedVideo(null);
     updateSearchParams(null);
+    setIsDetailOpen(false);
   }, [updateSearchParams]);
 
   const onIngredientsChange = (ingredients: string[], categories: string[]) => {
@@ -186,18 +191,30 @@ export default function DrinksClient() {
     const id = searchParams.get('id');
     if (id && videos.length > 0) {
       const found = videos.find(v => v.id === id);
-      if (found) setSelectedVideo(found);
+      if (found) {
+        setSelectedVideo(found);
+        setIsDetailOpen(true);
+      }
     }
   }, [searchParams, videos]);
 
   return (
-    <main className="min-h-[calc(100vh-64px)] px-12">
+    <main className="min-h-[calc(100vh-64px)] px-0 md:px-12">
+      {/* 모바일 필터 버튼 */}
+      <button
+        onClick={() => setIsFilterOpen(true)}
+        className="md:hidden fixed bottom-4 right-6 bg-[--bg-0] text-[--fg-1] border-[1px] border-solid border-[--fg-0] px-4 py-2 rounded-xl z-30 flex items-center gap-2 p-glow-2"
+      >
+        <span className="material-icons ml-[-4px]">filter_alt</span>
+        필터
+      </button>
+
       <div className="split-tabs flex">
-        <section className="flex-1 overflow-y-auto overflow-x-visible h-[calc(100vh-64px)] pr-8 pl-20 ml-[-80px]">
-          <h1>칵테일 목록</h1>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-8 p-4 transition-all duration-300">
+        <section className="flex-1 overflow-y-auto overflow-x-visible h-[calc(100vh-64px)] px-0 md:pr-8 md:pl-20 md:ml-[-80px]">
+          <h1 className="text-center md:ml-0 md:text-left">칵테일 목록</h1>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 p-4 transition-all duration-300">
             {videos.map((video) => (
-              <div key={`${video.id}-${search}-${sort.type}-${sort.direction}`} className="cursor-pointer">
+              <div key={`${video.id}-${search}-${sort.type}-${sort.direction}`} className="w-full aspect-[3/4]">
                 <CocktailCard 
                   video={video} 
                   focus={selectedVideo?.id === video.id}
@@ -210,8 +227,9 @@ export default function DrinksClient() {
             {loading && <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>}
           </div>
         </section>
-        <section className="w-[432px] px-8 sm:hidden md:block h-[calc(100vh-64px)] sticky top-5 overflow-y-scroll pt-12 overflow-x-visible">
-        {/* <section className="w-[400px] sm:hidden md:block h-[calc(100vh-104px)] sticky top-5 pt-12 overflow-visible"> */}
+
+        {/* PC 사이드바 */}
+        <section className="hidden md:block w-[432px] px-8 h-[calc(100vh-64px)] sticky top-5 overflow-y-scroll pt-12 overflow-x-visible">
           {selectedVideo ? (
             <DetailSidebar
               selectedVideo={selectedVideo}
@@ -232,6 +250,45 @@ export default function DrinksClient() {
           )}
           <div className="h-8"></div>
         </section>
+
+        {/* 모바일 바텀 시트 - 필터 */}
+        <BottomSheet
+          isOpen={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
+          title="필터"
+        >
+          <FilterSidebar
+            search={search}
+            setSearch={setSearch}
+            sort={sort}
+            onSortChange={(newSort) => {
+              setSort(newSort);
+              setIsFilterOpen(false);
+            }}
+            allIngredients={allIngredients}
+            selectedIngredients={selectedIngredients}
+            onIngredientsChange={(ingredients, categories) => {
+              onIngredientsChange(ingredients, categories);
+              setIsFilterOpen(false);
+            }}
+            selectedCategories={selectedCategories}
+          />
+        </BottomSheet>
+
+        {/* 모바일 바텀 시트 - 상세보기 */}
+        <BottomSheet
+          isOpen={isDetailOpen}
+          onClose={handleClose}
+          title={selectedVideo?.name || '상세 정보'}
+        >
+          {selectedVideo && (
+            <DetailSidebar
+              selectedVideo={selectedVideo}
+              onClose={handleClose}
+              onShare={handleShare}
+            />
+          )}
+        </BottomSheet>
       </div>
     </main>
   )

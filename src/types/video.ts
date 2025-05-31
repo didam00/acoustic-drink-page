@@ -9,4 +9,5 @@ export interface VideoData {
   like: number;
   view: number;
   ingredients?: string[];
+  glass?: "on_the_rock" | "cocktail" | "shot" | "long_drink" | "highball" | "beer" | "hurricane" | "margarita" | "coupe" | "flute" | "wine" | "mule" | "martini" | "any";
 }

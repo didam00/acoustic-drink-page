@@ -90,7 +90,7 @@ const DetailSidebar = ({ selectedVideo, onClose, onShare }: DetailSidebarProps) 
         if (!isOverlapping) {
           const before = result.slice(0, start);
           const after = result.slice(start + match[0].length); // 전체 매칭된 문자열 길이 사용
-          const highlighted = `<span class="text-[--s-7] font-medium mx-0.5">${match[1]}</span>`;
+          const highlighted = `<span class="ingredient-text">${match[1]}</span>`;
           result = before + highlighted + after;
           
           // 실제 텍스트 위치만 저장
