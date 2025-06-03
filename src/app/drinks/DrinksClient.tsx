@@ -225,15 +225,23 @@ export default function DrinksClient() {
         <section className="flex-1 overflow-y-auto overflow-x-visible h-[calc(100vh-64px)] px-0 md:pr-8 md:pl-20 md:ml-[-80px] touch-pan-y">
           <h1 className="md:ml-4">칵테일 목록</h1>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 p-4 transition-all duration-300">
-            {videos.map((video) => (
-              <div key={`${video.id}-${search}-${sort.type}-${sort.direction}`} className="w-full aspect-[3/4]">
-                <CocktailCard 
-                  video={video} 
-                  focus={selectedVideo?.id === video.id}
-                  onClick={() => handleCardClick(video)}
-                />
+            {videos.length > 0 ? (
+              videos.map((video) => (
+                <div key={`${video.id}-${search}-${sort.type}-${sort.direction}`} className="w-full aspect-[3/4]">
+                  <CocktailCard 
+                    video={video} 
+                    focus={selectedVideo?.id === video.id}
+                    onClick={() => handleCardClick(video)}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full flex flex-col items-center justify-center py-20 text-[--fg-0] animate-fade-in">
+                <span className="material-icons text-6xl mb-4">search_off</span>
+                <p className="text-lg">찾으시는 칵테일이 없어요</p>
+                <p className="text-sm mt-2">다른 재료나 검색어로 다시 찾아보세요</p>
               </div>
-            ))}
+            )}
           </div>
           <div ref={loadingRef} className="h-10 flex items-center justify-center">
             {loading && <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>}
