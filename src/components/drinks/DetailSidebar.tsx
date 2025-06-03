@@ -114,7 +114,7 @@ const DetailSidebar = ({ selectedVideo, onClose, onShare }: DetailSidebarProps) 
     <div className="detail-sidebar animate-slide-in-right">
       <div className="flex justify-between items-center mb-2">
         <h2 className="block text-[--p]">{currentVideo.name}</h2>
-        <button onClick={onClose} className="text-xl font-black transition-colors text-[--fg-0] hover:text-white mr-1">✕</button>
+        <button onClick={onClose} className="text-xl font-black transition-colors text-[--fg-0] hover:text-white mr-1 hidden md:block">✕</button>
       </div>
       <div className="rounded-lg overflow-hidden border border-[--p] mb-4 p-glow-2">
         <iframe
@@ -148,7 +148,7 @@ const DetailSidebar = ({ selectedVideo, onClose, onShare }: DetailSidebarProps) 
         )}
         <h3 className="mb-2 flex gap-1"><span className="tossface block mt-[-2]">🍸</span> 레시피</h3>
         <div 
-          className="whitespace-pre-wrap leading-2"
+          className="whitespace-pre-wrap leading-2 select-text"
           dangerouslySetInnerHTML={{ 
             __html: highlightIngredients(currentVideo.recipeText) 
           }}

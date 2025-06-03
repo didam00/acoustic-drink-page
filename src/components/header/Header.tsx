@@ -21,11 +21,12 @@ const Header = () => {
       fixed top-0 left-0 right-0
       flex items-center p-4
       transition-colors duration-250
-      z-50
-      ${isScrolled ? 'bg-[var(--bg-0)]/80 backdrop-blur-sm' : ''}
+      z-50 justify-center md:justify-start
     `}>
-      <Logo size={32} className="ml-6" />
-      <Nav />
+      <Logo className="ml-0 h-8 w-8 md:ml-6" />
+      <div className="hidden md:block">
+        <Nav />
+      </div>
     </header>
   )
 }

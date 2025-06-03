@@ -97,21 +97,43 @@ const FilterSidebar = ({
 
   // 잘 적어ㅓㅈ적어적어적어줍니다. -> 오타 아니니까 제발 수정 금지
   return (
-    <>
-      <div>
-        <h2><label className="block mb-2" htmlFor="search-input">검색</label></h2>
-        <input
-          id="search-input"
-          type="text"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          placeholder="잘 적어ㅓㅈ적어적어적어줍니다"
-          className="search-tab w-full"
-        />
-      </div>
+    <div className="flex flex-col gap-10">
       <SortSection sort={sort} onSortChange={onSortChange} />
-      <div className="mt-8">
-        <h2><label className="block mb-2">재료</label></h2>
+      <div className="search-filter">
+        <div className="flex items-center justify-between mb-2">
+          <h2><label className="block" htmlFor="search-input">검색</label></h2>
+          <button
+            onClick={() => {
+              setSearch('');
+              onIngredientsChange([], []);
+            }}
+            className="text-sm text-[--fg-0] hover:text-[--fg-1] transition-colors flex items-center gap-1"
+          >
+            <span className="material-icons text-base">refresh</span>
+            초기화
+          </button>
+        </div>
+        <div className="relative">
+          <input
+            id="search-input"
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="잘 적어ㅓㅈ적어적어적어줍니다"
+            className="search-tab w-full pr-8"
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[--fg-0] hover:text-[--fg-0] transition-colors p-1 rounded-full hover:bg-[--bg-2] h-8 w-8"
+            >
+              <span className="material-icons text-base">close</span>
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="ingredient-filter">
+        <h2><label className="block">재료</label></h2>
         {sortedCategories.map((category) => (
           <IngredientCategory
             key={category.id}
@@ -132,7 +154,7 @@ const FilterSidebar = ({
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

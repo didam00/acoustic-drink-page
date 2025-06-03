@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 export interface IngredientItem {
   name: string;
@@ -53,6 +53,18 @@ const IngredientCategory = ({
     }
   };
 
+  // 펼침 애니메이션을 위한 ref, 상태
+  const listRef = useRef<HTMLDivElement>(null);
+  const [maxHeight, setMaxHeight] = useState<string>('0px');
+
+  useEffect(() => {
+    if (isExpanded && listRef.current) {
+      setMaxHeight(listRef.current.scrollHeight + 'px');
+    } else {
+      setMaxHeight('0px');
+    }
+  }, [isExpanded, category.items.length]);
+
   return (
     <div className="mb-1">
       <button
@@ -71,31 +83,43 @@ const IngredientCategory = ({
           <span className="w-2 h-2 rounded-full bg-[--p]"></span>
         )}
       </button>
-      {isExpanded && (
-        <div className="flex flex-wrap gap-2 mt-2 ml-6 mb-4">
-          {category.items.map((item) => (
-            <label
-              key={item.name}
-              className={`
-                relative px-3 py-1.5 rounded-md text-sm
-                transition-colors cursor-pointer
-                ${selectedIngredients.includes(item.name) 
-                  ? 'bg-[--p] text-[--bg-0]' 
-                  : 'bg-[--bg-1] text-[--fg-1] hover:bg-[--bg-2]'
-                }
-              `}
-            >
-              <input
-                type="checkbox"
-                className="absolute opacity-0 w-0 h-0"
-                checked={selectedIngredients.includes(item.name)}
-                onChange={() => handleIngredientToggle(item.name, category.label)}
-              />
-              {item.label}
-            </label>
-          ))}
-        </div>
-      )}
+      <div
+        ref={listRef}
+        style={{
+          maxHeight,
+          overflow: 'hidden',
+        }}
+        className={`
+          flex flex-wrap gap-2 ml-6 
+          transition-all duration-300 ease-in-out
+          ${isExpanded 
+            ? 'mt-2 mb-4 opacity-100 translate-y-0' 
+            : 'opacity-0 -translate-y-2 pointer-events-none'
+          }
+        `}
+      >
+        {category.items.map((item) => (
+          <label
+            key={item.name}
+            className={`
+              relative px-3 py-1.5 rounded-md text-sm
+              transition-all duration-300 ease-in-out cursor-pointer scale-up-fade hover:rotate-[-2deg]
+              ${selectedIngredients.includes(item.name) 
+                ? 'bg-[--p] text-[--bg-0]' 
+                : 'bg-[--bg-1] text-[--fg-1] hover:bg-[--bg-2]'
+              }
+            `}
+          >
+            <input
+              type="checkbox"
+              className="absolute opacity-0 w-0 h-0"
+              checked={selectedIngredients.includes(item.name)}
+              onChange={() => handleIngredientToggle(item.name, category.label)}
+            />
+            {item.label}
+          </label>
+        ))}
+      </div>
     </div>
   );
 };

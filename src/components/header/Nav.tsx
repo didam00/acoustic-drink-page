@@ -6,10 +6,10 @@ const navItems = [
     label: '칵테일 목록',
     href: '/drinks',
   },
-  {
-    label: '재료 목록',
-    href: '/ingredients',
-  },
+  // {
+  //   label: '재료 목록',
+  //   href: '/ingredients',
+  // },
 ]
 
 const Nav = () => {

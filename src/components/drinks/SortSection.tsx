@@ -41,8 +41,8 @@ const SortSection = ({ sort, onSortChange }: SortSectionProps) => {
   };
 
   return (
-    <div className="mt-8">
-      <h2><label className="block mb-2">정렬</label></h2>
+    <div>
+      <h2><label className="block">정렬</label></h2>
       <div className="grid grid-cols-2 gap-2">
         {(['latest', 'alpha', 'views', 'likes'] as SortType[]).map((type) => (
           <button

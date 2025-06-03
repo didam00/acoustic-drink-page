@@ -23,6 +23,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  user-select: none;
+}
+
 :root {
   --bg-0: hsla(240, 17%, 6%, 1);
   --bg-1: hsla(240, 17%, 10%, 1);
@@ -80,10 +84,21 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
+@media (max-width: 768px) {
+  h1 {
+    display: none;
+    // font-family: 'HakgyoansimAllimjangR';
+    // margin: 0.5rem 0 0 0;
+    // font-size: 1.25rem;
+    // text-align: center;
+  }
+}
+
 h2 {
   @apply text-lg;
   font-family: 'HakgyoansimAllimjangR';
   color: var(--fg-2);
+  margin-bottom: 0.5rem;
 }
 
 h3 {
@@ -170,6 +185,16 @@ h3 {
 
 .fg-glow-0 {
   box-shadow: 0 8px 40px var(--fg-glow-0);
+  transition: all 0.2s ease;
+}
+
+.fg-glow-1 {
+  box-shadow: 0 12px 60px var(--fg-glow-1);
+  transition: all 0.2s ease;
+}
+
+.fg-glow-2 {
+  box-shadow: 0 0px 40px var(--fg-glow-1);
   transition: all 0.2s ease;
 }
 
@@ -317,4 +342,96 @@ h3 {
   100% {
     color: var(--fg-1);
   }
+}
+
+.scale-up-fade {
+  animation: scale-up-fade 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes scale-up-fade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.expand-fade {
+  overflow: hidden;
+  animation: expand-fade 0.75s ease-in-out;
+  max-height: 1000px; /* 충분히 큰 값으로 설정 */
+}
+@keyframes expand-fade {
+  0% {
+    max-height: 0;
+    transform: scaleY(0.95);
+  }
+  100% {
+    max-height: 1000px;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  80% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.3s ease-in;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
