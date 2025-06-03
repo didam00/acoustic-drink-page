@@ -5,9 +5,14 @@ interface BottomSheetProps {
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
+  emptyMessage?: {
+    icon: string;
+    title: string;
+    description: string;
+  };
 }
 
-export default function BottomSheet({ isOpen, onClose, children, title }: BottomSheetProps) {
+export default function BottomSheet({ isOpen, onClose, children, title, emptyMessage }: BottomSheetProps) {
   const [isClosing, setIsClosing] = useState(false);
   const animationTimeoutRef = useRef<NodeJS.Timeout>(null);
 
@@ -114,9 +119,17 @@ export default function BottomSheet({ isOpen, onClose, children, title }: Bottom
         onClick={handleClose}
         className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-40 md:hidden
           ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}
-          ${isOpen ? 'block' : 'hidden'}`
-        }
-      />
+          ${isOpen ? 'block' : 'hidden'}`}
+      >
+        {/* Empty Message Overlay */}
+        {emptyMessage && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white animate-fade-in">
+            <span className="material-icons text-6xl mb-4">{emptyMessage.icon}</span>
+            <p className="text-lg font-medium">{emptyMessage.title}</p>
+            <p className="text-sm mt-2 opacity-80">{emptyMessage.description}</p>
+          </div>
+        )}
+      </div>
       {/* Bottom Sheet */}
       <div
         ref={sheetRef}
