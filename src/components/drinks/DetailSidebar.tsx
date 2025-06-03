@@ -7,10 +7,13 @@ interface DetailSidebarProps {
   selectedVideo: VideoData;
   onClose: () => void;
   onShare: () => void;
+  isOpen?: boolean;
+  onCloseEnd?: () => void;
 }
 
-const DetailSidebar = ({ selectedVideo, onClose, onShare }: DetailSidebarProps) => {
+const DetailSidebar = ({ selectedVideo, onClose, onShare, isOpen = true, onCloseEnd }: DetailSidebarProps) => {
   const [currentVideo, setCurrentVideo] = useState(selectedVideo);
+  const [isClosing, setIsClosing] = useState(false);
 
   // 현재 비디오의 재료와 관련된 모든 텍스트를 가져오는 함수
   const getHighlightTargets = useMemo(() => {
@@ -105,16 +108,35 @@ const DetailSidebar = ({ selectedVideo, onClose, onShare }: DetailSidebarProps) 
   };
 
   useEffect(() => {
+    if (isOpen) {
+      setIsClosing(false);
+    } else {
+      setIsClosing(true);
+    }
+  }, [isOpen]);
+
+  const handleAnimationEnd = () => {
+    if (isClosing && onCloseEnd) {
+      onCloseEnd();
+    }
+  };
+
+  useEffect(() => {
     if (selectedVideo.id !== currentVideo.id) {
       setCurrentVideo(selectedVideo);
     }
   }, [selectedVideo]);
 
   return (
-    <div className="detail-sidebar animate-slide-in-right">
-      <div className="flex justify-between items-center mb-2">
+    <div
+      className={`detail-sidebar ${isClosing ? 'custom-slide-out-right' : 'custom-slide-in-right'}`}
+      onAnimationEnd={handleAnimationEnd}
+    >
+      <div className="flex justify-between items-center">
         <h2 className="block text-[--p]">{currentVideo.name}</h2>
-        <button onClick={onClose} className="text-xl font-black transition-colors text-[--fg-0] hover:text-white mr-1 hidden md:block">✕</button>
+        <button onClick={onClose} className="text-xl font-black transition-colors text-[--fg-0] hover:text-white mr-1 hidden md:block">
+          <span className="material-icons">close</span>
+        </button>
       </div>
       <div className="rounded-lg overflow-hidden border border-[--p] mb-4 p-glow-2">
         <iframe

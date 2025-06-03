@@ -53,6 +53,7 @@ export default function DrinksClient() {
   const searchParams = useSearchParams();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [showDetailSidebar, setShowDetailSidebar] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   // URL 파라미터 업데이트 함수
@@ -161,20 +162,24 @@ export default function DrinksClient() {
     setSelectedVideo(video);
     updateSearchParams(video.id);
     setIsDetailOpen(true);
-
+    setShowDetailSidebar(true);
     // 사이드바 스크롤 맨 위로 이동
     if (sidebarRef.current) {
       sidebarRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
   }, [updateSearchParams]);
 
   // 상세보기 닫기
   const handleClose = useCallback(() => {
-    setSelectedVideo(null);
     updateSearchParams(null);
     setIsDetailOpen(false);
   }, [updateSearchParams]);
+
+  // DetailSidebar 닫힘 애니메이션 후 완전 unmount
+  const handleDetailSidebarCloseEnd = useCallback(() => {
+    setShowDetailSidebar(false);
+    setSelectedVideo(null);
+  }, []);
 
   const onIngredientsChange = (ingredients: string[], categories: string[]) => {
     setSelectedIngredients(ingredients);
@@ -250,11 +255,13 @@ export default function DrinksClient() {
 
         {/* PC 사이드바 */}
         <section className="hidden md:block w-[432px] px-8 h-[calc(100vh-64px)] sticky top-5 overflow-y-scroll pt-12 overflow-x-visible" ref={sidebarRef}>
-          {selectedVideo ? (
+          {showDetailSidebar && selectedVideo ? (
             <DetailSidebar
               selectedVideo={selectedVideo}
               onClose={handleClose}
               onShare={handleShare}
+              isOpen={isDetailOpen}
+              onCloseEnd={handleDetailSidebarCloseEnd}
             />
           ) : (
             <FilterSidebar
@@ -302,11 +309,13 @@ export default function DrinksClient() {
           onClose={handleClose}
           title="칵테일 정보"
         >
-          {selectedVideo && (
+          {showDetailSidebar && selectedVideo && (
             <DetailSidebar
               selectedVideo={selectedVideo}
               onClose={handleClose}
               onShare={handleShare}
+              isOpen={isDetailOpen}
+              onCloseEnd={handleDetailSidebarCloseEnd}
             />
           )}
         </BottomSheet>

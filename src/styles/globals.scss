@@ -327,6 +327,18 @@ h3 {
   // animation: highlight 1s ease infinite;
 }
 
+.filter-reset-button {
+  span.material-icons {
+    transition: all 0.35s ease;
+  }
+
+  &:hover {
+    span.material-icons {
+      transform: rotate(90deg);
+    }
+  }
+}
+
 *::selection {
   background-color: var(--fg-1);
   color: var(--bg-0);
@@ -367,6 +379,7 @@ h3 {
   animation: expand-fade 0.75s ease-in-out;
   max-height: 1000px; /* 충분히 큰 값으로 설정 */
 }
+
 @keyframes expand-fade {
   0% {
     max-height: 0;
@@ -434,4 +447,31 @@ h3 {
 
 .animate-slide-down {
   animation: slide-down 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes custom-slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes custom-slide-out-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+.custom-slide-in-right {
+  animation: custom-slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.custom-slide-out-right {
+  animation: custom-slide-out-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

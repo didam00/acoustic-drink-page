@@ -107,7 +107,7 @@ const FilterSidebar = ({
               setSearch('');
               onIngredientsChange([], []);
             }}
-            className="text-sm text-[--fg-0] hover:text-[--fg-1] transition-colors flex items-center gap-1"
+            className="filter-reset-button text-sm text-[--fg-0] hover:text-[--fg-1] transition-colors flex items-center gap-1"
           >
             <span className="material-icons text-base">refresh</span>
             초기화
