@@ -275,6 +275,11 @@ export default function DrinksClient() {
         <BottomSheet
           isOpen={isFilterOpen}
           onClose={() => setIsFilterOpen(false)}
+          emptyMessage={videos.length === 0 ? {
+            icon: "search_off",
+            title: "찾으시는 칵테일이 없어요",
+            description: "다른 재료나 검색어로 다시 찾아보세요"
+          } : undefined}
         >
           <FilterSidebar
             search={search}

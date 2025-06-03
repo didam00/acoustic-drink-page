@@ -121,20 +121,21 @@ export default function BottomSheet({ isOpen, onClose, children, title, emptyMes
           ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}
           ${isOpen ? 'block' : 'hidden'}`}
       >
-        {/* Empty Message Overlay */}
+        {/* Empty Message */}
         {emptyMessage && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white animate-fade-in">
+          <div className="fixed top-20 left-0 right-0 z-50 md:hidden flex flex-col items-center justify-center text-white animate-fade-in px-4">
             <span className="material-icons text-6xl mb-4">{emptyMessage.icon}</span>
             <p className="text-lg font-medium">{emptyMessage.title}</p>
-            <p className="text-sm mt-2 opacity-80">{emptyMessage.description}</p>
+            <p className="text-sm mt-2 opacity-80 text-center">{emptyMessage.description}</p>
           </div>
         )}
       </div>
       {/* Bottom Sheet */}
       <div
         ref={sheetRef}
-        className={`fixed bottom-0 left-0 right-0 bg-[--bg-0] rounded-t-3xl z-50 md:hidden max-h-[85vh] overflow-y-auto overscroll-contain
-          ${isClosing ? 'animate-slide-down' : 'animate-slide-up'}`}
+        className={`fixed bottom-0 left-0 right-0 bg-[--bg-0] rounded-t-3xl z-50 md:hidden max-h-[85vh] overflow-y-auto overscroll-contain transition-all duration-350
+          ${isClosing ? 'animate-slide-down' : 'animate-slide-up'}
+          ${emptyMessage ? 'bottom-[-120px] pb-[120px]' : 'bottom-0'}`}
         style={{ touchAction: 'pan-y' }}
       >
         {/* Handle */}
