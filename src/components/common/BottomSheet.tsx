@@ -135,7 +135,9 @@ export default function BottomSheet({ isOpen, onClose, children, title, emptyMes
         ref={sheetRef}
         className={`fixed bottom-0 left-0 right-0 bg-[--bg-0] rounded-t-3xl z-50 md:hidden max-h-[85vh] overflow-y-auto overscroll-contain transition-all duration-350
           ${isClosing ? 'animate-slide-down' : 'animate-slide-up'}
-          ${emptyMessage ? 'bottom-[-200px] pb-[200px]' : 'bottom-0'}`}
+          ${emptyMessage ? 'bottom-[-200px] pb-[200px]' : 'bottom-0'}
+          ${isOpen ? 'block opacity-100' : 'hidden opacity-0'}`
+        }
         style={{ touchAction: 'pan-y' }}
       >
         {/* Handle */}
