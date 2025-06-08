@@ -3,7 +3,12 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
-    domains: ['i.ytimg.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+    ],
   },
   // Firebase Hosting을 위한 설정
   trailingSlash: true,

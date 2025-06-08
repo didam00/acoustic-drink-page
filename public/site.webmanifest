@@ -1,0 +1,9 @@
+{
+  "name": "비공식 어쿠스틱 드링크",
+  "short_name": "어쿠스틱 드링크",
+  "description": "아쿠스틱 드링크의 다양한 레시피를 간편하게 확인해보세요!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+} 

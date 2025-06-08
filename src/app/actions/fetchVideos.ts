@@ -3,6 +3,8 @@
 import axios from "axios";
 import { VideoData } from "@/types/video";
 import { extractName } from "@/lib/extractName";
+import { detectGlassType } from "@/lib/glassDetector";
+import { extractIngredients } from "@/lib/ingredientExtractor";
 
 const API_KEY = process.env.YOUTUBE_API_KEY!;
 const CHANNEL_ID = "UC1FZ59NCoUOpveg6nP6Dm-A";
@@ -143,6 +145,8 @@ export async function fetchVideos(): Promise<VideoData[]> {
           thumbnail: v.thumbnail,
           like: stats.like,
           view: stats.view,
+          glass: detectGlassType(recipeText),
+          ingredients: extractIngredients(recipeText),
         });
         console.log(`비디오 ${v.id} 처리 완료`);
       } catch (error) {
