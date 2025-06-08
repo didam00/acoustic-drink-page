@@ -4,7 +4,7 @@ import axios from "axios";
 import sharp from "sharp";
 
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: path.join(process.cwd(), "vision-service-account.json"),
+  keyFilename: path.join(process.cwd(), "key/vision-service-account.json"),
 });
 
 export async function extractName(imageUrl: string): Promise<string> {

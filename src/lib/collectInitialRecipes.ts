@@ -6,6 +6,8 @@ import { findRecipeInComments } from './extractRecipe';
 import { extractName } from './extractName';
 import { db } from './firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import { detectGlassType } from "./glassDetector";
+import { extractIngredients } from "./ingredientExtractor";
 
 const youtube = google.youtube('v3');
 const API_KEY = process.env.YOUTUBE_API_KEY;
@@ -82,6 +84,8 @@ export async function collectInitialRecipes() {
               thumbnail: video.snippet?.thumbnails?.high?.url || '',
               like: parseInt(video.statistics?.likeCount || '0'),
               view: parseInt(video.statistics?.viewCount || '0'),
+              glass: detectGlassType(recipeData.text),
+              ingredients: extractIngredients(recipeData.text),
             };
 
             videos.push(videoData);

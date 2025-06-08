@@ -45,13 +45,17 @@ export async function findRecipeInComments(videoId: string, channelId: string): 
     for (const comment of comments) {
       const snippet = comment.snippet?.topLevelComment?.snippet;
       if (!snippet) continue;
-
+      
       // 채널 주인의 댓글인지 확인
       if (snippet.authorChannelId?.value !== channelId) continue;
-
-      const text = snippet.textDisplay;
+      
+      const text = snippet.textDisplay?.replaceAll("\r", "");
+      
       // 레시피가 포함된 댓글인지 확인
-      if (text?.toLowerCase().includes('레시피<br>') || text?.toLowerCase().includes('레시피\n')) {
+      if (
+        text?.toLowerCase().replaceAll(" ", "").includes('레시피<br>') ||
+        text?.toLowerCase().replaceAll(" ", "").includes('레시피\n')
+      ) {
         const recipe = extractRecipeFromText(text);
         if (recipe) {
           return {

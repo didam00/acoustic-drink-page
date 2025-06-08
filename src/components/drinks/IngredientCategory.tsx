@@ -75,7 +75,7 @@ const IngredientCategory = ({
           <span className={`material-icons text-base transition-transform ${isExpanded ? 'rotate-90' : ''}`}>
             chevron_right
           </span>
-          <h4 className="text-sm font-medium text-[--fg-2]">
+          <h4 className="text-sm font-medium text-[--fg-1]">
             {category.label}
           </h4>
         </div>

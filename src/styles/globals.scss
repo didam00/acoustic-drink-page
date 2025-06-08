@@ -339,6 +339,14 @@ h3 {
   }
 }
 
+.card-container .name {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 *::selection {
   background-color: var(--fg-1);
   color: var(--bg-0);
@@ -452,7 +460,7 @@ h3 {
 @keyframes custom-slide-in-right {
   0% {
     opacity: 0;
-    transform: translateX(40px);
+    transform: translateX(20px);
   }
   100% {
     opacity: 1;
@@ -466,12 +474,12 @@ h3 {
   }
   100% {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(10px);
   }
 }
 .custom-slide-in-right {
-  animation: custom-slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: custom-slide-in-right 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 .custom-slide-out-right {
-  animation: custom-slide-out-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: custom-slide-out-right 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
