@@ -4,7 +4,20 @@ import axios from "axios";
 import sharp from "sharp";
 
 // 환경 변수에서 서비스 계정 키 읽기
-const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}');
+let credentials;
+try {
+  const credentialsJson = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON;
+  if (!credentialsJson) {
+    throw new Error('GOOGLE_APPLICATION_CREDENTIALS_JSON 환경 변수가 설정되지 않았습니다.');
+  }
+  credentials = JSON.parse(credentialsJson);
+  if (!credentials.client_email) {
+    throw new Error('서비스 계정 키에 client_email이 없습니다.');
+  }
+} catch (error) {
+  console.error('서비스 계정 키 파싱 중 오류:', error);
+  throw error;
+}
 
 const client = new vision.ImageAnnotatorClient({
   credentials,

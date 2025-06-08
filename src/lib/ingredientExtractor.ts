@@ -17,7 +17,6 @@ function loadIngredients(): Ingredient[] {
     }
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const data = JSON.parse(fileContent);
-    console.log(`${data.length}개의 재료를 로드했습니다.`);
     return data;
   } catch (error) {
     console.error('ingredients_tree.json 파일을 불러오는 중 오류 발생:', error);
