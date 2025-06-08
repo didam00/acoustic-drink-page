@@ -3,8 +3,11 @@ import path from "path";
 import axios from "axios";
 import sharp from "sharp";
 
+// 환경 변수에서 서비스 계정 키 읽기
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}');
+
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: path.join(process.cwd(), "key/vision-service-account.json"),
+  credentials,
 });
 
 export async function extractName(imageUrl: string): Promise<string> {
