@@ -3,15 +3,12 @@ import json
 import re
 from pathlib import Path
 
-# 서비스 계정 키 경로 (절대경로나 상대경로)
 db = firestore.Client.from_service_account_json("../key/firebase-service-account.json")
 video_collection = db.collection("videos")
 
-# 재료 목록 로드
 with open("ingredients.json", "r", encoding="utf-8") as f:
     ingredient_list = json.load(f)
 
-# 소분류 label 목록 로드
 tree_path = Path(__file__).parent / 'ingredients_tree.json'
 if tree_path.exists():
     with open(tree_path, encoding='utf-8') as f:
@@ -23,21 +20,13 @@ if tree_path.exists():
 else:
     subcategory_labels = []
 
-# 재료 이름과 동의어 매핑 생성
 ingredient_mapping = {}
 for item in ingredient_list:
-    # 메인 이름 추가
     ingredient_mapping[item["name"]] = item["name"]
-    # 동의어 추가
     for syn in item["syn"]:
         ingredient_mapping[syn] = item["name"]
 
 def extract_ingredients_from_text(recipe_text, ingredient_list, subcategory_labels=None):
-    """
-    recipeText에서 '-'와 '\n' 사이(재료 구간)만 추출 대상으로 삼고,
-    각 구간별로 동의어 포함 후보 재료명 + 소분류 label을 공백 없이 매칭,
-    이미 추출된 재료의 인덱스 범위와 겹치면 중복 추출하지 않음
-    """
     # 모든 후보 재료명(동의어 포함) 준비 (공백 제거)
     candidates = []
     for ing in ingredient_list:

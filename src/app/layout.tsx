@@ -36,11 +36,13 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: '비공식 어쿠스틱 드링크',
-    description: '아쿠스틱 드링크의 다양한 레시피를 간편하게 확인해보세요!',
-    images: ['/images/og-image.png'],
+  other: {
+    'og:image': '/images/og-image.png',
+    'og:image:width': '1200',
+    'og:image:height': '630',
+    'og:image:alt': '비공식 어쿠스틱 드링크',
+    'twitter:image': '/images/og-image.png',
+    'twitter:image:alt': '비공식 어쿠스틱 드링크',
   },
   robots: {
     index: true,

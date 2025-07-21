@@ -12,10 +12,6 @@ def save_json_file(data: dict, file_path: str) -> None:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 def build_name_to_category(tree):
-    """
-    ingredients_tree.json에서 재료명(name) → 소분류(category, label) 매핑을 만듭니다.
-    동명이인도 모두 매핑.
-    """
     name_to_category = {}
     for main_id, main_data in tree.items():
         for sub_id, sub_data in main_data['subcategories'].items():
@@ -29,7 +25,6 @@ def build_name_to_category(tree):
     return name_to_category
 
 def update_ingredient_categories():
-    # 파일 경로 설정
     script_dir = Path(__file__).parent
     ingredients_path = script_dir / 'ingredients.json'
     tree_path = script_dir / 'ingredients_tree.json'
