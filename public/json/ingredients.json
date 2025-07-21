@@ -8,6 +8,32 @@
     "name": "캄파리",
     "abv": 28,
     "type": "liqueur"
+  },
+  {
+    "name": "아그와",
+    "abv": 30,
+    "type": "liqueur"
+  },
+  {
+    "name": "그린 샤르트뢰즈",
+    "abv": 55,
+    "type": "liqueur",
+    "alter": [
+      "샤르트뢰즈"
+    ]
+  },
+  {
+    "name": "옐로 샤르트뢰즈",
+    "abv": 43,
+    "type": "liqueur"
+  },
+  {
+    "name": "서던 컴포트 오리지널",
+    "abv": 35,
+    "type": "liqueur",
+    "alter": [
+      "서던 컴포트"
+    ]
   }, 
   {
     "name": "그랑 마니에르",
@@ -28,9 +54,30 @@
     "type": "liqueur"
   },
   {
-    "name": "드람뷔",
-    "abv": 40,
+    "name": "깔루아 말차",
+    "abv": 20,
     "type": "liqueur"
+  },
+  {
+    "name": "헤르메스 그린티",
+    "abv": 20,
+    "type": "liqueur",
+    "alter": [
+      "헤르메스 말차",
+      "에르메스 그린티",
+      "에르메스 말차"
+    ]
+  },
+  {
+    "name": "드럼브이",
+    "abv": 40,
+    "type": "liqueur",
+    "alter": [
+      "드럼뷔",
+      "드람뷔",
+      "드람브이",
+      "드람부이"
+    ]
   },
   {
     "name": "룩사르도 마라스키노",
@@ -64,7 +111,10 @@
   {
     "name": "베네딕틴 D.O.M",
     "abv": 40,
-    "type": "liqueur"
+    "type": "liqueur",
+    "alter": [
+      "베네딕틴 DOM"
+    ]
   },
   {
     "name": "베일리스",
@@ -119,14 +169,41 @@
     "type": "liqueur"
   },
   {
-    "name": "크렘 드 민트 그린",
-    "abv": 25,
+    "name": "리몬첼로",
+    "abv": 30,
     "type": "liqueur"
   },
   {
-    "name": "크렘 드 민트 화이트",
+    "name": "크렘 드 멘트",
     "abv": 25,
-    "type": "liqueur"
+    "type": "liqueur",
+    "alter": [
+      "크렘 드 민트",
+      "크림 드 멘트",
+      "크림 드 민트"
+    ],
+    "children": [
+      {
+        "name": "크렘 드 민트 그린",
+        "abv": 25,
+        "type": "liqueur",
+        "alter": [
+          "크렘 드 멘트 그린",
+          "크림 드 멘트 그린",
+          "크림 드 민트 그린"
+        ]
+      },
+      {
+        "name": "크렘 드 민트 화이트",
+        "abv": 25,
+        "type": "liqueur",
+        "alter": [
+          "크렘 드 멘트 화이트",
+          "크림 드 멘트 화이트",
+          "크림 드 민트 화이트"
+        ]
+      }
+    ]
   },
   {
     "name": "크렘 드 카시스",
@@ -134,13 +211,37 @@
     "type": "liqueur"
   },
   {
-    "name": "크렘 드 카카오 화이트",
+    "name": "크렘 드 카카오",
     "abv": 0,
-    "type": "liqueur"
+    "type": "liqueur",
+    "children": [
+      {
+        "name": "크렘 드 카카오 블랑",
+        "abv": 0,
+        "type": "liqueur",
+        "alter": [
+          "디카이퍼 크렘 드 카카오 블랑",
+          "디카이퍼 크렘 드 카카오 화이트",
+          "크렘 드 카카오 화이트",
+          "카카오 화이트"
+        ]
+      },
+      {
+        "name": "크렘 드 카카오 브라운",
+        "abv": 0,
+        "type": "liqueur",
+        "alter": [
+          "디카이퍼 크렘 드 카카오 브라운",
+          "디카이퍼 크렘 드 카카오 다크",
+          "크렘 드 카카오 다크",
+          "카카오 다크"
+        ]
+      }
+    ]
   },
   {
     "name": "트리플 섹",
-    "abv": 0,
+    "abv": 40,
     "type": "liqueur"
   },
   {
@@ -151,14 +252,30 @@
   {
     "name": "피치트리",
     "abv": 0,
-    "type": "liqueur"
+    "type": "liqueur",
+    "alter": [
+      "피치"
+    ]
   },
   {
     "name": "콰이페",
-    "abv": 0,
+    "abv": 20,
     "type": "liqueur",
     "alter": [
       "리치 리큐르"
+    ]
+  },
+  {
+    "name": "힙노트",
+    "abv": 17,
+    "type": "liqueur"
+  },
+  {
+    "name": "지파드 파르페아모르",
+    "abv": 25,
+    "type": "liqueur",
+    "alter": [
+      "파르페아모르"
     ]
   },
   {
@@ -167,7 +284,14 @@
     "alter": [
       "연태고량주"
     ],
-    "type": "spirits"
+    "type": "spirits",
+    "children": [
+      {
+        "name": "띠디",
+        "abv": 38,
+        "type": "spirits"
+      }
+    ]
   },
   {
     "name": "깔바도스",
@@ -176,11 +300,6 @@
   },
   {
     "name": "메즈칼",
-    "abv": 40,
-    "type": "spirits"
-  },
-  {
-    "name": "브랜디",
     "abv": 40,
     "type": "spirits"
   },
@@ -195,7 +314,26 @@
     "alter": [
       "꼬냑"
     ],
-    "type": "spirits"
+    "type": "spirits",
+    "children": [
+      {
+        "name": "샴보드",
+        "abv": 16.5,
+        "type": "spirits"
+      },
+      {
+        "name": "브랜디",
+        "abv": 16.5,
+        "type": "spirits",
+        "children": [
+          {
+            "name": "헤네시",
+            "abv": 40,
+            "type": "spirits"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "피스코",
@@ -212,7 +350,7 @@
       },
       {
         "name": "론디아즈 151",
-        "abv": 0,
+        "abv": 75,
         "alter": [
           "151럼",
           "바카디 151"
@@ -223,6 +361,30 @@
         "name": "바카디 화이트",
         "abv": 0,
         "type": "rum"
+      },
+      {
+        "name": "바카디 리몬",
+        "abv": 35,
+        "type": "rum",
+        "alter": [
+          "바카디 레몬"
+        ]
+      },
+      {
+        "name": "바카디 8",
+        "abv": 40,
+        "type": "rum",
+        "alter": [
+          "바카디 8년"
+        ]
+      },
+      {
+        "name": "바카디 10",
+        "abv": 40,
+        "type": "rum",
+        "alter": [
+          "바카디 10년"
+        ]
       },
       {
         "name": "오버프루프 럼",
@@ -300,6 +462,11 @@
         "type": "whiskey"
       },
       {
+        "name": "조니워커 블랙라벨",
+        "abv": 0,
+        "type": "whiskey"
+      },
+      {
         "name": "조니워커 블랙라벨 오징어게임 에디션",
         "abv": 0,
         "type": "whiskey"
@@ -317,7 +484,10 @@
       {
         "name": "드라이 진",
         "abv": 40,
-        "type": "gin"
+        "type": "gin",
+        "alter": [
+          "헤이먼스 런던 드라이 진"
+        ]
       },
       {
         "name": "봄베이 브램블 진",
@@ -326,12 +496,28 @@
       },
       {
         "name": "올드 톰 진",
-        "abv": 0,
-        "type": "gin"
+        "abv": 40,
+        "type": "gin",
+        "alter": [
+          "헤이먼스 올드 톰 진"
+        ]
       },
       {
         "name": "핸드릭스 진",
         "abv": 0,
+        "type": "gin"
+      },
+      {
+        "name": "슬로진",
+        "abv": 0,
+        "type": "gin",
+        "alter": [
+          "헤이먼스 슬로진"
+        ]
+      },
+      {
+        "name": "엔진 진",
+        "abv": 42,
         "type": "gin"
       }
     ]
@@ -346,6 +532,11 @@
       },
       {
         "name": "케텔 원 보드카",
+        "abv": 0,
+        "type": "vodka"
+      },
+      {
+        "name": "시트론 보드카",
         "abv": 0,
         "type": "vodka"
       }
@@ -384,10 +575,18 @@
   {
     "name": "설탕",
     "abv": 0,
-    "type": "garnish"
+    "type": "garnish",
+    "alter": [
+      "각설탕"
+    ]
   },
   {
     "name": "시나몬 스틱",
+    "abv": 0,
+    "type": "garnish"
+  },
+  {
+    "name": "시나몬 파우더",
     "abv": 0,
     "type": "garnish"
   },
@@ -419,7 +618,35 @@
     "type": "bitter"
   },
   {
-    "name": "레드와인",
+    "name": "레드 와인",
+    "abv": 0,
+    "type": "wine"
+  },
+  {
+    "name": "화이트 와인",
+    "abv": 0,
+    "type": "wine",
+    "children": [
+      {
+        "name": "블루누드 와인",
+        "abv": 0,
+        "type": "wine",
+        "alter": [
+          "블루누드"
+        ]
+      },
+      {
+        "name": "셰리",
+        "abv": 0,
+        "type": "wine",
+        "alter": [
+          "피노"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "프로세코",
     "abv": 0,
     "type": "wine"
   },
@@ -444,9 +671,17 @@
     "type": "bitter"
   },
   {
+    "name": "레몬 라임 비터",
+    "abv": 0,
+    "type": "bitter"
+  },
+  {
     "name": "라임",
     "abv": 0,
-    "type": "fruit"
+    "type": "fruit",
+    "alter": [
+      "라임 착즙"
+    ]
   },
   {
     "name": "라임 즙",
@@ -466,7 +701,12 @@
   {
     "name": "레몬",
     "abv": 0,
-    "type": "fruit"
+    "type": "fruit",
+    "alter": [
+      "레몬 휠",
+      "레몬 필",
+      "레몬 슬라이스"
+    ]
   },
   {
     "name": "레몬 즙",
@@ -494,6 +734,11 @@
     "type": "fruit"
   },
   {
+    "name": "딸기 시럽",
+    "abv": 0,
+    "type": "fruit"
+  },
+  {
     "name": "사과",
     "abv": 0,
     "type": "fruit"
@@ -501,7 +746,14 @@
   {
     "name": "오렌지",
     "abv": 0,
-    "type": "fruit"
+    "type": "fruit",
+    "alter": [
+      "오렌지 휠",
+      "오렌지 필",
+      "오렌지 슬라이스",
+      "오렌지 껍질",
+      "오렌지 껍질 제스트"
+    ]
   },
   {
     "name": "오렌지 주스",
@@ -529,12 +781,22 @@
     "type": "fruit"
   },
   {
+    "name": "청포도",
+    "abv": 0,
+    "type": "fruit"
+  },
+  {
     "name": "체리",
     "abv": 0,
     "type": "fruit"
   },
   {
     "name": "파인애플",
+    "abv": 0,
+    "type": "fruit"
+  },
+  {
+    "name": "파인애플 주스",
     "abv": 0,
     "type": "fruit"
   },
@@ -554,6 +816,144 @@
       "지룩스 라임주스"
     ]
   },
+  
+  {
+    "name": "레모네이드",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "물",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "꿀",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "보리차 시럽",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "설탕 시럽",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "스윗 앤 사워 믹스",
+    "abv": 0,
+    "type": "other",
+    "alter": [
+      "스윗사워믹스"
+    ]
+  },
+  {
+    "name": "스프라이트",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "아가베 시럽",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "아몬드 브리즈",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "오렌지 플라워 워터",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "오르쟈 시럽",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "우유",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "제로펩시",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "진저에일",
+    "abv": 0,
+    "alter": [
+      "진지비어"
+    ]
+  },
+  {
+    "name": "코코넛 밀크",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "코코넛 크림",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "생크림",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "바닐라 익스트랙",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "콜라",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "크러쉬드 아이스",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "탄산수",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "에너지 드링크",
+    "abv": 0,
+    "type": "other",
+    "children": [
+      {
+        "name": "레드불",
+        "abv": 0,
+        "type": "other"
+      }
+    ]
+  },
+  {
+    "name": "토닉워터",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "패션후르츠 믹스",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "피나콜라다 믹스",
+    "abv": 0,
+    "type": "other"
+  },
   {
     "name": "에스프레소",
     "abv": 0,
@@ -568,8 +968,156 @@
     ]
   },
   {
-    "name": "원두",
+    "name": "커피 원두",
+    "abv": 0,
+    "type": "other",
+    "alter": [
+      "원두"
+    ]
+  },
+  {
+    "name": "계란",
+    "abv": 0,
+    "alter": [
+      "달걀",
+      "계란 흰자"
+    ],
+    "type": "other"
+  },
+  {
+    "name": "고등어",
     "abv": 0,
     "type": "other"
+  },
+  {
+    "name": "그레나딘 시럽",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "맥주",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "바나나",
+    "abv": 0,
+    "type": "other",
+    "alter": [
+      "바나나 슬라이스"
+    ]
+  },
+  {
+    "name": "바나나 리큐르",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "바닐라 시럽",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "벌꿀",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "블루 큐라소",
+    "abv": 0,
+    "type": "other",
+    "alter": [
+      "블루"
+    ]
+  },
+  {
+    "name": "스타우트",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "아몬드 익스트랙",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "아페롤",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "우롱차",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "엘더플라워 리큐르",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "오이",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "밀키스",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "말차 파우더",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "코코아 파우더",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "올리브",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "지룩스 라임",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "청양고추",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "크렌베리",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "테라",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "허니 시럽",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "얼음",
+    "abv": 0,
+    "type": "other"
+  },
+  {
+    "name": "빨대",
+    "abv": 0,
+    "type": "object"
+  },
+  {
+    "name": "식용 꽃",
+    "abv": 0,
+    "type": "object"
   }
 ]

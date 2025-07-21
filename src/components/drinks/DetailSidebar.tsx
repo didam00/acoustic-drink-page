@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { VideoData } from '@/types/video';
-import ingredientsTreeData from '../../../public/json/ingredients_tree.json';
-import { IngredientsTree } from './types';
+import { highlightIngredients } from '@/lib/ingredients';
+import { updateRecipeText } from '@/lib/recipes';
 
 interface DetailSidebarProps {
   selectedVideo: VideoData;
@@ -14,98 +14,13 @@ interface DetailSidebarProps {
 const DetailSidebar = ({ selectedVideo, onClose, onShare, isOpen = true, onCloseEnd }: DetailSidebarProps) => {
   const [currentVideo, setCurrentVideo] = useState(selectedVideo);
   const [isClosing, setIsClosing] = useState(false);
-
-  // 현재 비디오의 재료와 관련된 모든 텍스트를 가져오는 함수
-  const getHighlightTargets = useMemo(() => {
-    if (!currentVideo.ingredients) return [];
-    
-    const targets = new Set<string>();
-    
-    // 현재 비디오의 재료들을 순회
-    currentVideo.ingredients.forEach(ingredientName => {
-      // 기본 재료명 추가
-      targets.add(ingredientName);
-      
-      // ingredients_tree.json에서 해당 재료 찾기
-      Object.values(ingredientsTreeData as IngredientsTree).forEach(category => {
-        // 카테고리 라벨 추가
-        targets.add(category.label);
-        
-        Object.values(category.subcategories).forEach(sub => {
-          // 서브카테고리 라벨 추가
-          targets.add(sub.label);
-          
-          // 현재 재료와 일치하는 항목 찾기
-          const foundItem = sub.items.find(item => 
-            item.label === ingredientName || 
-            (item.syn && item.syn.includes(ingredientName))
-          );
-          
-          if (foundItem) {
-            // 동의어 추가
-            if (foundItem.syn) {
-              foundItem.syn.forEach(synonym => {
-                targets.add(synonym);
-              });
-            }
-          }
-        });
-      });
-    });
-    
-    // 긴 단어부터 매칭하도록 정렬
-    return Array.from(targets)
-      .filter(label => label.trim())
-      .sort((a, b) => b.length - a.length);
-  }, [currentVideo.ingredients]);
-
-  // 레시피 텍스트에서 재료를 하이라이트 처리하는 함수
-  const highlightIngredients = (text: string) => {
-    if (!text) return '';
-    
-    let result = text;
-    const processedRanges: [number, number][] = [];
-
-    getHighlightTargets.forEach(target => {
-      // 띄어쓰기를 제거한 타겟 문자열 생성
-      const normalizedTarget = target.replace(/\s+/g, '');
-      // 띄어쓰기를 무시하는 정규식 패턴 생성
-      const pattern = normalizedTarget.split('').join('\\s*');
-      // 하이픈 뒤의 재료 이름만 매칭 (하이픈 제외)
-      const regex = new RegExp(`(?<=-\\s*)(${pattern})(?=\\s|$)`, 'g');
-      
-      let match;
-      while ((match = regex.exec(result)) !== null) {
-        const start = match.index;
-        const end = start + match[1].length; // match[1]은 캡처된 그룹(재료 이름)만 사용
-        
-        // 이미 처리된 범위와 겹치는지 확인 (HTML 태그 제외한 실제 텍스트 기준)
-        const isOverlapping = processedRanges.some(([rangeStart, rangeEnd]) => {
-          const currentStart = start;
-          const currentEnd = end;
-          return (
-            (currentStart >= rangeStart && currentStart < rangeEnd) ||
-            (currentEnd > rangeStart && currentEnd <= rangeEnd) ||
-            (currentStart <= rangeStart && currentEnd >= rangeEnd)
-          );
-        });
-        
-        if (!isOverlapping) {
-          const before = result.slice(0, start);
-          const after = result.slice(start + match[0].length); // 전체 매칭된 문자열 길이 사용
-          const highlighted = `<span class="ingredient-text">${match[1]}</span>`;
-          result = before + highlighted + after;
-          
-          // 실제 텍스트 위치만 저장
-          processedRanges.push([start, end]);
-          // 다음 검색 시작 위치를 실제 매칭된 재료 이름 끝으로 설정
-          regex.lastIndex = start + match[0].length;
-        }
-      }
-    });
-    
-    return result;
-  };
+  const recipeRef = useRef<HTMLDivElement>(null);
+  const isDev = process.env.NODE_ENV === 'development';
+  const [editMode, setEditMode] = useState(false);
+  const [editedRecipe, setEditedRecipe] = useState(currentVideo.recipeText);
+  const [originalRecipe, setOriginalRecipe] = useState(currentVideo.recipeText);
+  const [editedName, setEditedName] = useState(currentVideo.name);
+  const [originalName, setOriginalName] = useState(currentVideo.name);
 
   useEffect(() => {
     if (isOpen) {
@@ -124,8 +39,41 @@ const DetailSidebar = ({ selectedVideo, onClose, onShare, isOpen = true, onClose
   useEffect(() => {
     if (selectedVideo.id !== currentVideo.id) {
       setCurrentVideo(selectedVideo);
+      setEditedRecipe(selectedVideo.recipeText);
+      setOriginalRecipe(selectedVideo.recipeText);
+      setEditedName(selectedVideo.name);
+      setOriginalName(selectedVideo.name);
+      setEditMode(false);
     }
   }, [selectedVideo]);
+
+  useEffect(() => {
+    if (!editMode && recipeRef.current) {
+      highlightIngredients(currentVideo.recipeText).then(result => {
+        recipeRef.current!.innerHTML = result;
+      });
+    }
+  }, [currentVideo.recipeText, editMode]);
+
+  const handleEdit = () => {
+    setEditMode(true);
+    setEditedRecipe(currentVideo.recipeText);
+    setOriginalRecipe(currentVideo.recipeText);
+    setEditedName(currentVideo.name);
+    setOriginalName(currentVideo.name);
+  };
+
+  const handleCancel = () => {
+    setEditMode(false);
+    setEditedRecipe(originalRecipe);
+    setEditedName(originalName);
+  };
+
+  const handleSave = async () => {
+    await updateRecipeText(currentVideo.id, editedRecipe, editedName);
+    setCurrentVideo({ ...currentVideo, recipeText: editedRecipe, name: editedName });
+    setEditMode(false);
+  };
 
   return (
     <div
@@ -133,11 +81,44 @@ const DetailSidebar = ({ selectedVideo, onClose, onShare, isOpen = true, onClose
       onAnimationEnd={handleAnimationEnd}
     >
       <div className="flex justify-between items-center">
-        <h2 className="block text-[--p]">{currentVideo.name}</h2>
+        {isDev && editMode ? (
+          <input
+            type="text"
+            value={editedName}
+            onChange={e => setEditedName(e.target.value)}
+            className="block text-[--p] bg-[--bg-1] w-full text-lg mb-2"
+          />
+        ) : (
+          <h2 className="block text-[--p]">{currentVideo.name}</h2>
+        )}
         <button onClick={onClose} className="text-xl font-black transition-colors text-[--fg-0] hover:text-white mr-1 hidden md:block">
           <span className="material-icons">close</span>
         </button>
       </div>
+      {isDev && !editMode && (
+          <button
+            className="mb-4 px-3 py-1.5 rounded bg-[--bg-2] text-white text-sm hover:bg-[--fg-0] transition-colors"
+            onClick={handleEdit}
+          >
+            수정
+          </button>
+      )}
+      {isDev && editMode && (
+        <div className="flex gap-2 mb-4">
+          <button
+            className="px-3 py-1.5 rounded bg-green-600 text-white text-sm font-bold hover:bg-green-700 transition-colors"
+            onClick={handleSave}
+          >
+            완료
+          </button>
+          <button
+            className="px-3 py-1.5 rounded bg-gray-400 text-white text-sm font-bold hover:bg-gray-500 transition-colors"
+            onClick={handleCancel}
+            >
+            취소
+          </button>
+        </div>
+      )}
       <div className="rounded-lg overflow-hidden border border-[--p] mb-4 p-glow-2">
         <iframe
           width="100%"
@@ -169,12 +150,34 @@ const DetailSidebar = ({ selectedVideo, onClose, onShare, isOpen = true, onClose
           </div>
         )}
         <h3 className="mb-2 flex gap-1"><span className="tossface block mt-[-2]">🍸</span> 레시피</h3>
-        <div 
-          className="whitespace-pre-wrap leading-2 select-text"
-          dangerouslySetInnerHTML={{ 
-            __html: highlightIngredients(currentVideo.recipeText) 
-          }}
-        />
+        {isDev && editMode ? (
+          <div>
+            <textarea
+              value={editedRecipe}
+              onChange={e => setEditedRecipe(e.target.value)}
+              className="w-full h-80 mt-4 p-4 bg-[--bg-1] rounded"
+            />
+            <div className="flex gap-2">
+              <button
+                className="px-3 py-1.5 rounded bg-green-600 text-white text-sm font-bold hover:bg-green-700 transition-colors"
+                onClick={handleSave}
+              >
+                완료
+              </button>
+              <button
+                className="px-3 py-1.5 rounded bg-gray-400 text-white text-sm font-bold hover:bg-gray-500 transition-colors"
+                onClick={handleCancel}
+              >
+                취소
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div 
+            ref={recipeRef}
+            className="whitespace-pre-wrap leading-2 select-text"
+          />
+        )}
       </div>
     </div>
   );

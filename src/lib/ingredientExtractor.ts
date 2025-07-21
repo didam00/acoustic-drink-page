@@ -3,7 +3,7 @@ import path from 'path';
 
 export interface Ingredient {
   name: string;
-  syn: string[];
+  alter: string[];
 }
 
 // JSON 파일 로드 함수
@@ -35,7 +35,7 @@ export function extractIngredients(recipeText: string): string[] {
   // 모든 후보 재료명(동의어 포함) 준비 (공백 제거)
   const candidates: [string, string][] = [];
   for (const ing of INGREDIENT_LIST) {
-    const names = [ing.name, ...ing.syn];
+    const names = [ing.name, ...ing.alter];
     for (const n of names) {
       candidates.push([n.replace(/\s+/g, ""), ing.name]);
     }
