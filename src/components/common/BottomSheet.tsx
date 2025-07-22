@@ -117,7 +117,7 @@ export default function BottomSheet({ isOpen, onClose, children, title, emptyMes
       {/* Backdrop */}
       <div
         onClick={handleClose}
-        className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-40 md:hidden
+        className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-60 md:hidden
           ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}
           ${isOpen ? 'block' : 'hidden'}`}
       >

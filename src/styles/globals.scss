@@ -139,9 +139,10 @@ h3 {
     .img-wrap {
       border: 1px solid var(--p);
       box-shadow: 0 8px 60px var(--p-glow-1);
+      background-color: var(--p);
 
       img {
-        // opacity: 0.75;
+        opacity: 0.75;
       }
     }
 
@@ -456,6 +457,36 @@ h3 {
   animation: slide-down 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+.animate-scale-down {
+  animation: scale-down 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scale-up {
+  animation: scale-up 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes scale-down {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 @keyframes custom-slide-in-right {
   0% {
     opacity: 0;
@@ -466,6 +497,7 @@ h3 {
     transform: translateX(0);
   }
 }
+
 @keyframes custom-slide-out-right {
   0% {
     opacity: 1;
@@ -476,6 +508,7 @@ h3 {
     transform: translateX(10px);
   }
 }
+
 .custom-slide-in-right {
   animation: custom-slide-in-right 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

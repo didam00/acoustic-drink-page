@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type SortType = 'latest' | 'alpha' | 'views' | 'likes';
+export type SortType = 'latest' | 'alpha' | 'likes' | 'level';
 export type SortDirection = 'asc' | 'desc';
 
 export interface SortOption {
@@ -18,8 +18,8 @@ const getSortLabel = (type: SortType): string => {
   switch (type) {
     case 'latest': return '최신순';
     case 'alpha': return '가나다순';
-    case 'views': return '조회수';
     case 'likes': return '좋아요';
+    case 'level': return '난이도';
     default: return '';
   }
 };
@@ -44,7 +44,7 @@ const SortSection = ({ sort, onSortChange }: SortSectionProps) => {
     <div>
       <h2><label className="block">정렬</label></h2>
       <div className="grid grid-cols-2 gap-2">
-        {(['latest', 'alpha', 'views', 'likes'] as SortType[]).map((type) => (
+        {(['latest', 'alpha', 'likes', 'level'] as SortType[]).map((type) => (
           <button
             key={type}
             onClick={() => handleSortClick(type)}

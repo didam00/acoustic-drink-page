@@ -5,7 +5,7 @@ export interface Ingredient {
 }
 
 // JSON 파일 로드 함수
-async function loadIngredients(): Promise<string[]> {
+export async function loadIngredients(): Promise<string[]> {
   const res = await fetch("/json/ingredients.json");
   const data = await res.json();
 

@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import SortSection from './SortSection';
 import IngredientCategory from './IngredientCategory';
-import ingredientsTreeData from '../../../public/json/ingredients_tree.json';
 import { IngredientsTree } from './types';
-import { IngredientItem } from './IngredientCategory';
+import type { IngredientItem } from './IngredientCategory';
 import { getChoseong } from 'es-hangul';
+import { useEffect } from 'react';
 
-type SortType = 'latest' | 'alpha' | 'views' | 'likes';
+type SortType = 'latest' | 'alpha' | 'likes' | 'level';
 type SortDirection = 'asc' | 'desc';
 
 interface SortOption {
@@ -24,6 +24,7 @@ interface FilterSidebarProps {
   selectedIngredients: string[];
   onIngredientsChange: (ingredients: string[], categories: string[]) => void;
   selectedCategories: string[];
+  isClosing?: boolean;
 }
 
 // 초성 매핑 (쌍자음은 단자음으로)
@@ -44,6 +45,50 @@ const CHOSEONG_MAP: { [key: string]: string } = {
   'ㅎ': 'ㅎ'
 };
 
+// IngredientItem으로 변환하는 함수
+function flattenIngredients(data: any[], parentCategory?: string): IngredientItem[] {
+  let result: IngredientItem[] = [];
+  for (const ing of data) {
+    const syn = ing.alter ?? [];
+    result.push({
+      name: ing.name,
+      label: ing.name,
+      abv: typeof ing.abv === 'number' ? ing.abv : 0,
+      syn,
+      category: parentCategory,
+    });
+    if (Array.isArray(ing.children)) {
+      result = result.concat(flattenIngredients(ing.children, ing.name));
+    }
+  }
+  return result;
+}
+
+// 초성 그룹화
+function groupByChoseong(items: IngredientItem[]) {
+  // 가나다순 정렬
+  const sortedItems = items.slice().sort((a, b) => a.label.localeCompare(b.label, 'ko'));
+  const groups: { [key: string]: IngredientItem[] } = {};
+  for (const item of sortedItems) {
+    const choseong = CHOSEONG_MAP[getChoseong(item.label).at(0) || ''];
+    if (!choseong) continue;
+    if (!groups[choseong]) groups[choseong] = [];
+    groups[choseong].push(item);
+  }
+  // 그룹을 배열로 변환하고 정렬
+  return Object.entries(groups)
+    .sort(([a], [b]) => {
+      const order = 'ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ';
+      return order.indexOf(a) - order.indexOf(b);
+    })
+    .map(([label, items]) => ({
+      id: `choseong-${label}`,
+      label: `${label} (${items.length})`,
+      items,
+      parentCategory: undefined
+    }));
+}
+
 const FilterSidebar = ({
   search,
   setSearch,
@@ -52,52 +97,25 @@ const FilterSidebar = ({
   allIngredients,
   selectedIngredients,
   onIngredientsChange,
-  selectedCategories
+  selectedCategories,
+  isClosing = false
 }: FilterSidebarProps) => {
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const [sortedCategories, setSortedCategories] = useState<any[]>([]);
 
-  // 모든 재료를 가져와서 초성 기준으로 그룹화
-  const sortedCategories = useMemo(() => {
-    // 모든 재료를 하나의 배열로 모음
-    const allItems = Object.values(ingredientsTreeData as IngredientsTree)
-      .flatMap(category => 
-        Object.values(category.subcategories)
-          .flatMap(sub => sub.items)
-      );
-
-    // 가나다순으로 정렬
-    const sortedItems = allItems.sort((a, b) => 
-      a.label.localeCompare(b.label, 'ko')
-    );
-
-    // 초성으로 그룹화
-    const groups = sortedItems.reduce((acc, item) => {
-      const choseong = CHOSEONG_MAP[getChoseong(item.label).at(0) || ''];
-      if (!choseong) return acc;
-      if (!acc[choseong]) {
-        acc[choseong] = [];
-      }
-      acc[choseong].push(item);
-      return acc;
-    }, {} as { [key: string]: IngredientItem[] });
-
-    // 그룹을 배열로 변환하고 정렬
-    return Object.entries(groups)
-      .sort(([a], [b]) => {
-        const order = 'ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ';
-        return order.indexOf(a) - order.indexOf(b);
-      })
-      .map(([label, items]) => ({
-        id: `choseong-${label}`,
-        label: `${label} (${items.length})`,
-        items,
-        parentCategory: undefined
-      }));
+  useEffect(() => {
+    fetch('/json/ingredients.json')
+      .then(res => res.json())
+      .then((data) => {
+        const allIngredientItems: IngredientItem[] = flattenIngredients(data);
+        const grouped = groupByChoseong(allIngredientItems);
+        setSortedCategories(grouped);
+      });
   }, []);
 
   // 잘 적어ㅓㅈ적어적어적어줍니다. -> 오타 아니니까 제발 수정 금지
   return (
-    <div className="flex flex-col gap-10">
+    <div className={`flex flex-col gap-10 ${isClosing ? 'animate-scale-down' : 'animate-scale-up'}`}>
       <SortSection sort={sort} onSortChange={onSortChange} />
       <div className="search-filter">
         <div className="flex items-center justify-between mb-2">

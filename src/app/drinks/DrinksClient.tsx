@@ -3,16 +3,15 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import CocktailCard from '@/components/drinks/CocktailCard';
 import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy, limit, startAfter, DocumentSnapshot, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { VideoData } from '@/types/video';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import FilterSidebar from '@/components/drinks/FilterSidebar';
 import DetailSidebar from '@/components/drinks/DetailSidebar';
 import BottomSheet from '@/components/common/BottomSheet';
-import ingredientsTreeData from '../../../public/json/ingredients_tree.json';
-import { IngredientsTree } from '@/components/drinks/types';
+import type { Ingredient } from '@/lib/ingredients';
 
-type SortType = 'latest' | 'alpha' | 'views' | 'likes';
+type SortType = 'latest' | 'alpha' | 'likes' | 'level';
 type SortDirection = 'asc' | 'desc';
 
 interface SortOption {
@@ -22,6 +21,68 @@ interface SortOption {
 }
 
 const ITEMS_PER_PAGE = 20;
+
+// 상하위 재료 확장 함수
+function buildIngredientMaps(tree: Ingredient[]) {
+  // name -> {parents: Set, children: Set}
+  const parentMap: { [name: string]: Set<string> } = {};
+  const childMap: { [name: string]: Set<string> } = {};
+
+  function traverse(node: Ingredient, parentNames: string[] = []) {
+    const name = node.name;
+    if (!name) return;
+    // 부모 등록
+    if (!parentMap[name]) parentMap[name] = new Set();
+    parentNames.forEach(p => parentMap[name].add(p));
+    // 자식 등록
+    if (!childMap[name]) childMap[name] = new Set();
+    if (node.children) {
+      for (const child of node.children) {
+        childMap[name].add(child.name);
+        traverse(child, [...parentNames, name]);
+      }
+    }
+  }
+
+  for (const node of tree) {
+    traverse(node);
+  }
+
+  // 하위 전체 재귀적으로
+  function getAllChildren(name: string): Set<string> {
+    const result = new Set<string>();
+    function dfs(n: string) {
+      if (childMap[n]) {
+        for (const c of childMap[n]) {
+          if (!result.has(c)) {
+            result.add(c);
+            dfs(c);
+          }
+        }
+      }
+    }
+    dfs(name);
+    return result;
+  }
+  // 상위 전체 재귀적으로
+  function getAllParents(name: string): Set<string> {
+    const result = new Set<string>();
+    function dfs(n: string) {
+      if (parentMap[n]) {
+        for (const p of parentMap[n]) {
+          if (!result.has(p)) {
+            result.add(p);
+            dfs(p);
+          }
+        }
+      }
+    }
+    dfs(name);
+    return result;
+  }
+
+  return { getAllChildren, getAllParents };
+}
 
 export default function DrinksClient() {
   const [allVideos, setAllVideos] = useState<VideoData[]>([]);
@@ -55,6 +116,39 @@ export default function DrinksClient() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [showDetailSidebar, setShowDetailSidebar] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const [ingredientTree, setIngredientTree] = useState<Ingredient[]>([]);
+  const [ingredientMaps, setIngredientMaps] = useState<{ getAllChildren: (name: string) => Set<string>, getAllParents: (name: string) => Set<string> } | null>(null);
+  const [isFilterClosing, setIsFilterClosing] = useState(false);
+
+  // DetailSidebar의 isClosing과 동기화
+  useEffect(() => {
+    if (!showDetailSidebar && !selectedVideo) {
+      setIsFilterClosing(false);
+    } else if (!showDetailSidebar && selectedVideo) {
+      setIsFilterClosing(true);
+    }
+  }, [showDetailSidebar, selectedVideo]);
+
+  useEffect(() => {
+    fetch('/json/ingredients.json')
+      .then(res => res.json())
+      .then(data => {
+        setIngredientTree(data);
+        setIngredientMaps(buildIngredientMaps(data));
+      });
+  }, []);
+
+  // 확장된 재료 그룹(AND-OR) 만들기
+  const expandedGroups = React.useMemo(() => {
+    if (!ingredientMaps || selectedIngredients.length === 0) return [];
+    return selectedIngredients.map(ing => {
+      const set = new Set<string>();
+      set.add(ing);
+      ingredientMaps.getAllChildren(ing).forEach(i => set.add(i as string));
+      ingredientMaps.getAllParents(ing).forEach(i => set.add(i as string));
+      return Array.from(set);
+    });
+  }, [selectedIngredients, ingredientMaps]);
 
   // URL 파라미터 업데이트 함수
   const updateSearchParams = useCallback((id: string | null) => {
@@ -92,12 +186,13 @@ export default function DrinksClient() {
   // 검색/정렬된 전체 목록
   const filteredSorted = React.useMemo(() => {
     let arr = allVideos;
-    
-    // 재료 필터링. 이 재료들로 만들 수 있음
-    if (selectedIngredients.length > 0) {
+    // 재료 필터링. 각 확장 그룹별로 하나 이상 포함되어야 함
+    if (expandedGroups.length > 0) {
       arr = arr.filter(v => {
         if (!v.ingredients || v.ingredients.length === 0) return false;
-        return selectedIngredients.every(ing => v.ingredients?.includes(ing));
+        return expandedGroups.every(group =>
+          group.some(ing => v.ingredients.includes(ing))
+        );
       });
     }
 
@@ -121,10 +216,10 @@ export default function DrinksClient() {
           const an = a.name || '';
           const bn = b.name || '';
           return multiplier * an.localeCompare(bn, 'ko', { sensitivity: 'base', ignorePunctuation: true });
-        case 'views':
-          return multiplier * ((a.view || 0) - (b.view || 0));
         case 'likes':
           return multiplier * ((a.like || 0) - (b.like || 0));
+        case 'level':
+          return multiplier * ((a.ingredients.length || 0) - (b.ingredients.length || 0));
         case 'latest':
         default:
           const dateA = new Date(a.publishedAt || 0).getTime();
@@ -133,7 +228,7 @@ export default function DrinksClient() {
       }
     });
     return arr;
-  }, [allVideos, search, sort, selectedIngredients]);
+  }, [allVideos, search, sort, expandedGroups]);
 
   // lazy loading (프론트에서 페이징)
   const fetchMoreData = () => {
@@ -273,6 +368,7 @@ export default function DrinksClient() {
               selectedIngredients={selectedIngredients}
               onIngredientsChange={onIngredientsChange}
               selectedCategories={selectedCategories}
+              isClosing={isFilterClosing}
             />
           )}
           <div className="h-8"></div>
